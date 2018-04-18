@@ -4,7 +4,6 @@ from socket import *
 # Create a TCP server socket
 #(AF_INET is used for IPv4 protocols)
 #(SOCK_STREAM is used for TCP)
-
 serverSocket = socket(AF_INET, SOCK_STREAM)
 
 # Assign a port number
@@ -31,17 +30,15 @@ while True:
 	try:
 		# Receives the request message from the client
 		message =  connectionSocket.recv(1024)
-		#print(message)
-		# Extract the path of the requested object from the message
-		# The path is the second part of HTTP header, identified by [1]
-
  
 		if(len(message) != 0):
 
+                        # Extract the path of the requested object from the message
+        		# The path is the second part of HTTP header, identified by [1]
 			filename = message.split()[1]   
 
 		        # Because the extracted path of the HTTP request includes 
-		        # a character '\', we read the path from the second character
+		        # a character '/', we read the path from the second character
 			f = open(filename[1:])
 			# Store the entire contenet of the requested file in a temporary buffer
 			outputdata = f.read()
@@ -55,8 +52,6 @@ while True:
 			crlf = "\r\n"
 			connectionSocket.send(crlf.encode('utf-8'))
 
-			print(message.decode('utf-8'))
-	
 			# Close the client connection socket
 			connectionSocket.close()
 
@@ -68,6 +63,8 @@ while True:
 		connectionSocket.send(outputHtml.encode('utf-8'))
 		# Close the client connection socket
 		connectionSocket.close()
+
+	print(message.decode('utf-8'))
 
 serverSocket.close()  
 

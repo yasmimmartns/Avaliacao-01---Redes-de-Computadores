@@ -6,8 +6,8 @@ public final class server{
 
 	public static void main(String arvg[]) throws Exception{
 
-	    // Ajustar o número da porta
-	    int port = 6789;
+        // Ajustar o número da porta
+        int port = 6789;
 
         //Estabelecer o socket de escuta
         ServerSocket socket = new ServerSocket(port);
@@ -26,8 +26,7 @@ public final class server{
             //Iniciar o thread
             thread.start();
         }
-
-	}
+    }
 }
 
 final class HttpRequest implements Runnable{
@@ -46,12 +45,12 @@ final class HttpRequest implements Runnable{
 		    processRequest();
         }   
         catch (Exception e) {
-    		System.out.println(e);
-    	}
+            System.out.println(e);
+        }
 	}
 	private void processRequest() throws Exception{
 
-		// Obter uma referência para os trechos de entrada e saída do socket
+	    // Obter uma referência para os trechos de entrada e saída do socket
 	    InputStream is = socket.getInputStream();
 	    DataOutputStream os = new DataOutputStream(socket.getOutputStream());
 
